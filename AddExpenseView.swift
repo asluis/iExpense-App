@@ -23,7 +23,7 @@ struct AddExpense_UI: View {
     
     let transOptions = ["Personal", "Business"]
     
-    
+
     
     
     var body: some View {
@@ -41,23 +41,20 @@ struct AddExpense_UI: View {
                         }
                     }.pickerStyle(SegmentedPickerStyle())
                 }
-                
             }
             .navigationTitle("Add New Expense")
             .navigationBarItems(leading:
                 Button(action: {
-                    //TODO: Reset state
-                    
                     presentationMode.wrappedValue.dismiss()
                 }){
                     Image(systemName: "arrowshape.turn.up.backward.fill")
                 }
             ,trailing:
                 Button(action: {
-                    // TODO: Perform action of adding expense to list
                     if let actualPrice = Double(self.price) {
                         expenses.expenseList.append(ExpenseEntry(name: transactionName, type: transOptions[transSelection], price: actualPrice))
                         print("\(actualPrice) actual final price")
+                        //Save data. Is it saved automatically because of didSet?
                         presentationMode.wrappedValue.dismiss()
                     } else{
                         showAlert(msg: "Please make sure you enter the price correctly.", title: "Error Reading Price")
@@ -78,7 +75,9 @@ struct AddExpense_UI: View {
         showingAlert = true
     }
     
+
     
+
 }
 
 struct AddExpense_UI_Previews: PreviewProvider {

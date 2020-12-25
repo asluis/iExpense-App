@@ -46,6 +46,8 @@ struct ContentView: View {
         }
     }
     
+
+    
     func deleteOffSet(at offset: IndexSet){
         self.expenses.expenseList.remove(atOffsets: offset)
     }
