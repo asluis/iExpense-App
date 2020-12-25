@@ -31,6 +31,8 @@ struct AddExpense_UI: View {
             Form{
                 Section(header: Text("Add transaction details")){
                     TextField("Transaction Price", text: $price)
+                        .keyboardType(.decimalPad)
+                        
                     TextField("Transaction Name", text: $transactionName)
                 }
                 
