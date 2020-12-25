@@ -18,9 +18,15 @@ class Expenses: ObservableObject{
 
 
 struct ExpenseEntry: Hashable, Identifiable{
-    let name = ""
-    let type = ""
-    let price = 0
+    let name:String
+    let type:String
+    let price:Double
+    
+    init(name:String, type:String, price: Double){
+        self.name = name
+        self.type = type
+        self.price = price
+    }
     
     let id = UUID()
 

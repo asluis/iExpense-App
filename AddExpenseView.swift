@@ -15,9 +15,15 @@ struct AddExpense_UI: View {
     @State var transactionName = ""
     @State var transSelection = 0
     
+    @State var showingAlert = false
+    @State var alertMsg = ""
+    @State var alertTitle = ""
+    
     @Environment(\.presentationMode) var presentationMode
     
     let transOptions = ["Personal", "Business"]
+    
+    
     
     
     var body: some View {
@@ -30,8 +36,8 @@ struct AddExpense_UI: View {
                 
                 Section(header: Text("Select transaction type")){
                     Picker("", selection: $transSelection){
-                        ForEach(transOptions, id: \.self) { type in
-                            Text(type)
+                        ForEach(0..<transOptions.count, id: \.self){ i in
+                            Text(transOptions[i])
                         }
                     }.pickerStyle(SegmentedPickerStyle())
                 }
@@ -49,13 +55,30 @@ struct AddExpense_UI: View {
             ,trailing:
                 Button(action: {
                     // TODO: Perform action of adding expense to list
-                    presentationMode.wrappedValue.dismiss()
+                    if let actualPrice = Double(self.price) {
+                        expenses.expenseList.append(ExpenseEntry(name: transactionName, type: transOptions[transSelection], price: actualPrice))
+                        print("\(actualPrice) actual final price")
+                        presentationMode.wrappedValue.dismiss()
+                    } else{
+                        showAlert(msg: "Please make sure you enter the price correctly.", title: "Error Reading Price")
+                    }
                 }){
                     Image(systemName: "plus")
                 }
             )
+            .alert(isPresented: $showingAlert){
+                Alert(title: Text(alertTitle), message: Text(alertMsg), dismissButton: .default(Text("Dismiss")))
+            }
         }
     }
+    
+    func showAlert(msg:String, title:String){
+        self.alertMsg = msg
+        alertTitle = title
+        showingAlert = true
+    }
+    
+    
 }
 
 struct AddExpense_UI_Previews: PreviewProvider {
