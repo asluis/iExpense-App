@@ -25,7 +25,6 @@ class Expenses: ObservableObject{
     func extractData() -> [ExpenseEntry] {
         if let data = UserDefaults.standard.data(forKey: "expenseList"){
             let decoder = JSONDecoder()
-            
             if let decoded = try? decoder.decode([ExpenseEntry].self, from: data){
                 return decoded
             }

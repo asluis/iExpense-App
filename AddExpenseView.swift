@@ -22,10 +22,7 @@ struct AddExpense_UI: View {
     @Environment(\.presentationMode) var presentationMode
     
     let transOptions = ["Personal", "Business"]
-    
 
-    
-    
     var body: some View {
         NavigationView{
             Form{
@@ -76,10 +73,6 @@ struct AddExpense_UI: View {
         alertTitle = title
         showingAlert = true
     }
-    
-
-    
-
 }
 
 struct AddExpense_UI_Previews: PreviewProvider {
